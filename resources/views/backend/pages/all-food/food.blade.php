@@ -9,13 +9,13 @@ table, th, td {
 th{
     color: white !important;
 }
-th:nth-child(6){
+th:nth-child(8){
     width: 20% !important;
 }
-td:nth-child(6){
+td:nth-child(8){
     text-align: right !important;
 }
-td:nth-child(7){
+td:nth-child(9){
     text-align:left !important;
 }
 </style>
@@ -25,7 +25,7 @@ td:nth-child(7){
 
 <section id="main-content">
 <h1 style="text-align:center;color:#5264f2; ">User  Information</h1>
-<div class="container"><a class="btn btn-primary"style="background-color:#5264f2; color:white" href="{{route('userform')}}">Create</a>
+<div class="container"><a class="btn btn-primary"style="background-color:#5264f2; color:white" href="{{route('food.form')}}">Create</a>
 </div>
 <br>
 <br>
@@ -35,28 +35,33 @@ td:nth-child(7){
     <tr>
       <th >ID</th>
       <th >Name</th>
-      <th >Email</th>
-      <th >Mobile</th>
-      <th >Address</th>
+      <th >Description</th>
+      <th >Quantity</th>
+      <th >Price</th>
+      <th >stock-status</th>
+      <th >category-Name</th>
       <th colspan="2">Action</th>
      
     </tr>
   </thead>
   <tbody >
-    @foreach($alluser as $key=>$singleuser)
+   @foreach($foods as $food)
     <tr>
-    <td scope="row">{{$key+1}}</td>
-      <td>{{$singleuser->user_name}}</td>
-      <td>{{$singleuser->user_email}}</td>
-      <td>{{$singleuser->user_mobile}}</td>
-      <td>{{$singleuser->user_address}}</td>
-      <td><a class="btn btn-primary btn-sm" href="{{route('user.editform',$singleuser->id)}}">Edit</a></td>
-      <td><a class="btn btn-danger btn-sm" href="{{route('user.delete',$singleuser->id)}}">Delete</a></td>
+    <td scope="row">{{$food->id}}</td>
+      <td>{{$food->name}}</td>
+      <td>{{$food->description}}</td>
+      <td>{{$food->quantity}}</td>
+      <td>{{$food->price}}</td>
+      <td>{{$food->stock_status}}</td>
+      <td>{{$food->categoryRelation->category_name}}</td>
+      
+      <td><a class="btn btn-primary btn-sm" href="{{route('food.editpage',$food->id)}}">Edit</a></td>
+      <td><a class="btn btn-danger btn-sm" href="{{route('food.delete',$food->id)}}">Delete</a></td>
       
       
     </tr>
     @endforeach
-
+    
 
     
    

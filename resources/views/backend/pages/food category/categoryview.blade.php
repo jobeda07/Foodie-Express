@@ -44,9 +44,9 @@ td:nth-child(8){
   <tbody >
     
 
-  @foreach($categories as $category)
+  @foreach($categories as $key=>$category)
     <tr>
-      <td>{{$category->id}}</td>
+      <td>{{$key+1}}</td>
       <td>{{$category->category_name}}</td>
       <td><img class="rounded-circle" width="80px" src="{{url('/uploads/category/'.$category->category_image)}}" alt="img not found"></td>
       <td>{{$category->status}}</td>

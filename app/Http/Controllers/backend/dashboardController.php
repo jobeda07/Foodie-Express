@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\Food;
+use App\Models\Category;
 use App\Models\UserModel;
+use App\Models\AdminModel;
 use App\Models\Deliveryboy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Support\Facades\File;
 
 class dashboardController extends Controller
@@ -122,7 +124,7 @@ class dashboardController extends Controller
 
 
     public function deliveryboy(){
-        $deliveryboys = Deliveryboy::all();
+        $deliveryboys = Deliveryboy::paginate(3);
         return view('backend.pages.deliveryboy.deliveryboy',compact('deliveryboys'));
 
     }
@@ -179,5 +181,104 @@ class dashboardController extends Controller
         $deliveryboy->delete();
         return back();
       }
+       public function admin(){
+        $admin=AdminModel::all();
+        return view('backend.pages.admin.admin',compact('admin'));
+
+       }
+       public function admin_form(){
+        return view('backend.pages.admin.adminform');
+
+       }
+       public function admin_form_submit(Request $request){
+        //dd($request);
+        AdminModel::create([
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'Mobile'=>$request->Mobile,
+            'email'=>$request->email,
+            'address'=>$request->address,
+            'username'=>$request->username,
+            'password'=>$request->password
+        ]);
+        return to_route('admin');
+
+       }
+       public function admin_delete($id){
+           AdminModel::find($id)->delete();
+           return back();
+       }
+       public function admin_editpage($id){
+        $edit=AdminModel::find($id);
+            return view('backend.pages.admin.adminedit',compact('edit'));
+       }
+       public function admin_update(Request $request, $id){
+        $admin_update=AdminModel::find($id);
+        $admin_update->update([
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'Mobile'=>$request->Mobile,
+            'email'=>$request->email,
+            'address'=>$request->address,
+            'username'=>$request->username,
+            'password'=>$request->password
+        ]);
+        return to_route('admin');
+       }
+
+
+                                  //foodmethod
+     public function food(){
+        $foods = Food::with('categoryRelation')->get();
+       return view('backend.pages.all-food.food',compact('foods'));
+}
+      public function food_form(){
+        $categories=Category::all();
+          return view('backend.pages.all-food.food-form' ,compact('categories'));
+}
+
+   public function store(Request $request){
+     Food::create([
+    'name' =>$request->name,
+    'description' =>$request->description,
+    'quantity' =>$request->quantity,
+    'price' =>$request->price,
+    'stock_status' =>$request->stock_status,
+    'category_id' =>$request->category_id,
+
+   ]);
+   return to_route('food');
+} 
+
+     public function food_editpage($id){
+        $categories=Category::all();
+        $food_edit=Food::find($id);
+        return view('backend.pages.all-food.food-edit',compact('categories','food_edit'));
+     } 
+     public function food_update(Request $request, $id){
+        $food=Food::find($id);
+        $food->update([
+            'name' =>$request->name,
+            'description' =>$request->description,
+            'quantity' =>$request->quantity,
+            'price' =>$request->price,
+            'stock_status' =>$request->stock_status,
+            'category_id' =>$request->category_id,
+        
+           ]);
+           return to_route('food');
+     }
+     public function food_delete($id){
+        Food::find($id)->delete();
+        return back();
+
+
+
+     }
+
+
+
+
+
 
 }

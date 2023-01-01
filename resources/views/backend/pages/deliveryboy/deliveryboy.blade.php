@@ -64,17 +64,17 @@ td:nth-child(8){
     </tr>
     
 @endforeach
-
-    
-   
-    
-  </tbody>
+ </tbody>
 </table>
+
 </div>
+<div class="d-flex justify-content-center">
+   {{$deliveryboys->links()}}
+</div>
+
 </section>
 
 
 
 @endsection
-
 

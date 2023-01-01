@@ -51,3 +51,29 @@ Route::post('deliveryboy-form-submit',[dashboardController::class,'deliveryboy_f
 Route::get('/deliveryboy-editpage/{id}',[dashboardController::class,'delivery_editpage'])->name('delivery.editpage');
 Route::put('/deliveryboy-edit-submit/{id}',[dashboardController::class,'edit_submit'])->name('delivery.edit.submit');
 Route::get('/deliveryboy-delete/{id}',[dashboardController::class,'deliveryboy_delete'])->name('deliveryboy.delete');
+
+
+
+
+                            //admin//
+
+                           
+ Route::get('admin',[dashboardController::class,'admin'])->name('admin');
+ Route::get('admin-form',[dashboardController::class,'admin_form'])->name('admin.form');
+ Route::post('admin-form-submit',[dashboardController::class,'admin_form_submit'])->name('admin.form.submit');
+ Route::get('admin-delete/{id}',[dashboardController::class,'admin_delete'])->name('admin.delete');
+ Route::get('admin-editpage/{id}',[dashboardController::class,'admin_editpage'])->name('admin.editpage');
+ Route::put('admin-update/{id}',[dashboardController::class,'admin_update'])->name('admin.update');
+
+
+
+                             //food//
+Route::get('food-list',[dashboardController::class,'food'])->name('food');
+Route::post('food-store',[dashboardController::class,'store'])->name('food.store');
+Route::get('food-form',[dashboardController::class,'food_form'])->name('food.form');
+Route::get('food-form',[dashboardController::class,'food_form'])->name('food.form');
+Route::get('food-editpage/{id}',[dashboardController::class,'food_editpage'])->name('food.editpage');
+Route::put('food-update/{id}',[dashboardController::class,'food_update'])->name('food.update');
+Route::get('food-delete/{id}',[dashboardController::class,'food_delete'])->name('food.delete');
+
+                           

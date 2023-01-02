@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\frontend\homeController;
 use App\Http\Controllers\backend\dashboardController;
 
 /*
@@ -75,5 +76,14 @@ Route::get('food-form',[dashboardController::class,'food_form'])->name('food.for
 Route::get('food-editpage/{id}',[dashboardController::class,'food_editpage'])->name('food.editpage');
 Route::put('food-update/{id}',[dashboardController::class,'food_update'])->name('food.update');
 Route::get('food-delete/{id}',[dashboardController::class,'food_delete'])->name('food.delete');
+
+
+
+
+
+
+                     
+                      //home-start
+Route::get('home',[homeController::class,'home'])->name('home');                                
 
                            

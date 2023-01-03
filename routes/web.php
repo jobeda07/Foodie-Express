@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\authController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\homeController;
 use App\Http\Controllers\backend\dashboardController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,18 @@ use App\Http\Controllers\backend\dashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+                                   //register
+Route::get('/register',[authController::class,'register'])->name('register');
+Route::post('/register-submit',[authController::class,'register_submit'])->name('register.submit');
+
+                                     //login
+Route::get('/login',[authController::class,'login'])->name('login');
+Route::post('/login-submit',[authController::class,'login_submit'])->name('login.submit');
+
+
+Route::group(['middleware'=>'auth'],function(){
+
 
                              //dashboard
 Route::get('dashboard',[dashboardController::class,'dashboard'])->name('dashboard');
@@ -80,10 +94,13 @@ Route::get('food-delete/{id}',[dashboardController::class,'food_delete'])->name(
 
 
 
+         
+
+});
+
+                           
 
 
                      
                       //home-start
-Route::get('home',[homeController::class,'home'])->name('home');                                
-
-                           
+Route::get('home',[homeController::class,'home'])->name('home');

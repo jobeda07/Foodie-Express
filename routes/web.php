@@ -32,6 +32,9 @@ Route::post('/login-submit',[authController::class,'login_submit'])->name('login
 
 Route::group(['middleware'=>'auth'],function(){
 
+                   //logout
+    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
 
                              //dashboard
 Route::get('dashboard',[dashboardController::class,'dashboard'])->name('dashboard');

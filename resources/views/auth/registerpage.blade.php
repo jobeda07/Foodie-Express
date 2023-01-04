@@ -35,31 +35,50 @@
 
 <body>
 
+
 <section class="vh-100 ">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px; margin-top:15px;">
-            <div class="card-body p-5">
+          <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-4 fw-bold" >Create an account</h2>
+             
+              @if($errors->any())
+        @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">{{$error}}</p>
+        @endforeach
+    @endif
+
+    @if(session()->has('warning'))
+            <p class="alert alert-success">
+                {{session()->get('warning')}}
+            </p>
+        @endif
+
+ @if($message =session()->get('danger'))
+ 
+  <strong  class="alert alert-danger alert-block">{{$message}}</strong>
+ 
+ @endif
 
               <form action="{{route('register.submit')}}" method="post">
                 @csrf
              
                 <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example1cg">Your Name</label>
-                  <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" />
+                  <input type="text" required name="name" id="form3Example1cg" class="form-control form-control-lg" />
                 </div>
 
                 <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example3cg">Your Email</label>
-                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
+                  <input type="email" required name="email" id="form3Example3cg" class="form-control form-control-lg" />
                 </div>
 
                 <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4cg">Password</label>
-                  <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
+                  <input type="password" required name="password" id="form3Example4cg" class="form-control form-control-lg" />
                 </div>
 
                 <!-- <div class="form-outline mb-4">

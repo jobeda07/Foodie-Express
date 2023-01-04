@@ -48,6 +48,24 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-white-50 mb-5">Please enter your login and password!</p>
+              @if($errors->any())
+        @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">{{$error}}</p>
+        @endforeach
+    @endif
+
+    @if(session()->has('message'))
+            <p class="alert alert-success">
+                {{session()->get('message')}}
+            </p>
+        @endif
+        
+    @if(session()->has('danger'))
+            <p class="alert alert-danger">
+                {{session()->get('danger')}}
+            </p>
+        @endif
+
         <form action="{{route('login.submit')}}" method="post">
             @csrf
         <div class="form-outline form-white mb-4">
